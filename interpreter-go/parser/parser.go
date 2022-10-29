@@ -30,7 +30,7 @@ var precedences = map[token.TokenType]int{
 	token.MINUS:    SUM,
 	token.SLASH:    PRODUCT,
 	token.ASTERISK: PRODUCT,
-	token.LPAREN: 	CALL,
+	token.LPAREN:   CALL,
 }
 
 type Parser struct {
@@ -132,18 +132,14 @@ func (p *Parser) parseStatement() ast.Statement {
 
 // Parse LET statement
 func (p *Parser) parseLetStatement() *ast.LetStatement {
-	// Construct Statement Node
 	stmt := &ast.LetStatement{Token: p.curToken}
 
-	// First expect IDENT token for let statement
 	if !p.expectPeek(token.IDENT) {
 		return nil
 	}
 
-	// Construct Identifier Node
 	stmt.Name = &ast.Identifier{Token: p.curToken, Value: p.curToken.Literal}
 
-	// Next expect ASSIGN token for let statement
 	if !p.expectPeek(token.ASSIGN) {
 		return nil
 	}
@@ -152,7 +148,7 @@ func (p *Parser) parseLetStatement() *ast.LetStatement {
 
 	stmt.Value = p.parseExpression(LOWEST)
 
-	for !p.curTokenIs(token.SEMICOLON) {
+	if p.peekTokenIs(token.SEMICOLON) {
 		p.nextToken()
 	}
 
@@ -196,7 +192,7 @@ func (p *Parser) parseReturnStatement() *ast.ReturnStatement {
 
 	stmt.ReturnValue = p.parseExpression(LOWEST)
 
-	for !p.curTokenIs(token.SEMICOLON) {
+	if p.peekTokenIs(token.SEMICOLON) {
 		p.nextToken()
 	}
 
@@ -234,7 +230,9 @@ func (p *Parser) parseExpression(precedence int) ast.Expression {
 		if infix == nil {
 			return leftExp
 		}
+
 		p.nextToken()
+
 		leftExp = infix(leftExp)
 	}
 
