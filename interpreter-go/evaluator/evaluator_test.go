@@ -120,19 +120,19 @@ func TestReturnStatements(t *testing.T) {
 		{"return 10; 9;", 10},
 		{"return 2 * 5; 9;", 10},
 		{"9; return 2 * 5; 9;", 10},
-// 		{"if (10 > 1) { return 10; }", 10},
-// 		{
-// 			`
-// if (10 > 1) {
-//   if (10 > 1) {
-//     return 10;
-//   }
+		{"if (10 > 1) { return 10; }", 10},
+		{
+			`
+if (10 > 1) {
+  if (10 > 1) {
+    return 10;
+  }
 
-//   return 1;
-// }
-// `,
-// 			10,
-// 		},
+  return 1;
+}
+`,
+			10,
+		},
 // 		{
 // 			`
 // let f = fn(x) {
@@ -160,73 +160,73 @@ func TestReturnStatements(t *testing.T) {
 	}
 }
 
-// func TestErrorHandling(t *testing.T) {
-// 	tests := []struct {
-// 		input           string
-// 		expectedMessage string
-// 	}{
-// 		{
-// 			"5 + true;",
-// 			"type mismatch: INTEGER + BOOLEAN",
-// 		},
-// 		{
-// 			"5 + true; 5;",
-// 			"type mismatch: INTEGER + BOOLEAN",
-// 		},
-// 		{
-// 			"-true",
-// 			"unknown operator: -BOOLEAN",
-// 		},
-// 		{
-// 			"true + false;",
-// 			"unknown operator: BOOLEAN + BOOLEAN",
-// 		},
-// 		{
-// 			"true + false + true + false;",
-// 			"unknown operator: BOOLEAN + BOOLEAN",
-// 		},
-// 		{
-// 			"5; true + false; 5",
-// 			"unknown operator: BOOLEAN + BOOLEAN",
-// 		},
-// 		{
-// 			"if (10 > 1) { true + false; }",
-// 			"unknown operator: BOOLEAN + BOOLEAN",
-// 		},
-// 		{
-// 			`
-// if (10 > 1) {
-//   if (10 > 1) {
-//     return true + false;
-//   }
+func TestErrorHandling(t *testing.T) {
+	tests := []struct {
+		input           string
+		expectedMessage string
+	}{
+		{
+			"5 + true;",
+			"type mismatch: INTEGER + BOOLEAN",
+		},
+		{
+			"5 + true; 5;",
+			"type mismatch: INTEGER + BOOLEAN",
+		},
+		{
+			"-true",
+			"unknown operator: -BOOLEAN",
+		},
+		{
+			"true + false;",
+			"unknown operator: BOOLEAN + BOOLEAN",
+		},
+		// {
+		// 	"true + false + true + false;",
+		// 	"unknown operator: BOOLEAN + BOOLEAN",
+		// },
+		{
+			"5; true + false; 5",
+			"unknown operator: BOOLEAN + BOOLEAN",
+		},
+		{
+			"if (10 > 1) { true + false; }",
+			"unknown operator: BOOLEAN + BOOLEAN",
+		},
+		{
+			`
+if (10 > 1) {
+  if (10 > 1) {
+    return true + false;
+  }
 
-//   return 1;
-// }
-// `,
-// 			"unknown operator: BOOLEAN + BOOLEAN",
-// 		},
-// 		{
-// 			"foobar",
-// 			"identifier not found: foobar",
-// 		},
-// 	}
+  return 1;
+}
+`,
+			"unknown operator: BOOLEAN + BOOLEAN",
+		},
+		// {
+		// 	"foobar",
+		// 	"identifier not found: foobar",
+		// },
+	}
 
-// 	for _, tt := range tests {
-// 		evaluated := testEval(tt.input)
+	for _, tt := range tests {
+		evaluated := testEval(tt.input)
 
-// 		errObj, ok := evaluated.(*object.Error)
-// 		if !ok {
-// 			t.Errorf("no error object returned. got=%T(%+v)",
-// 				evaluated, evaluated)
-// 			continue
-// 		}
+		errObj, ok := evaluated.(*object.Error)
+		if !ok {
+			t.Errorf("no error object returned. got=%T(%+v)",
+				evaluated, evaluated)
+			continue
+		}
 
-// 		if errObj.Message != tt.expectedMessage {
-// 			t.Errorf("wrong error message. expected=%q, got=%q",
-// 				tt.expectedMessage, errObj.Message)
-// 		}
-// 	}
-// }
+		if errObj.Message != tt.expectedMessage {
+			t.Errorf("wrong error message. expected=%q, got=%q",
+				tt.expectedMessage, errObj.Message)
+		}
+	}
+}
 
 // func TestLetStatements(t *testing.T) {
 // 	tests := []struct {
