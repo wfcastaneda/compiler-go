@@ -18,7 +18,7 @@ const (
 	PRODUCT     // *
 	PREFIX      // -X or !X
 	CALL        // myFunction(X)
-	INDEX		// array[index]
+	INDEX       // array[index]
 )
 
 // Precedence table which maps token types to precedence values (above)
@@ -32,7 +32,7 @@ var precedences = map[token.TokenType]int{
 	token.SLASH:    PRODUCT,
 	token.ASTERISK: PRODUCT,
 	token.LPAREN:   CALL,
-	token.LBRACKET:	INDEX,
+	token.LBRACKET: INDEX,
 }
 
 type Parser struct {
@@ -75,6 +75,7 @@ func New(l *lexer.Lexer) *Parser {
 	p.registerPrefix(token.FUNCTION, p.parseFunctionLiteral)
 	p.registerPrefix(token.STRING, p.parseStringLiteral)
 	p.registerPrefix(token.LBRACKET, p.parseArrayLiteral)
+	p.registerPrefix(token.LBRACE, p.parseHashLiteral)
 
 	// Map TokenTypes to infix parse fn's
 	p.infixParseFns = make(map[token.TokenType]infixParseFn)
@@ -353,14 +354,43 @@ func (p *Parser) parseArrayLiteral() ast.Expression {
 	return array
 }
 
-func (p *Parser) parseExpresssionList( end token.TokenType) []ast.Expression {
+func (p *Parser) parseHashLiteral() ast.Expression {
+	hash := &ast.HashLiteral{Token: p.curToken}
+	hash.Pairs = make(map[ast.Expression]ast.Expression)
+
+	for !p.peekTokenIs(token.RBRACE) {
+		p.nextToken()
+		key := p.parseExpression(LOWEST)
+
+		if !p.expectPeek(token.COLON) {
+			return nil
+		}
+
+		p.nextToken()
+		value := p.parseExpression(LOWEST)
+
+		hash.Pairs[key] = value
+
+		if !p.peekTokenIs(token.RBRACE) && !p.expectPeek(token.COMMA) {
+			return nil
+		}
+	}
+
+	if !p.expectPeek(token.RBRACE) {
+		return nil
+	}
+
+	return hash
+}
+
+func (p *Parser) parseExpresssionList(end token.TokenType) []ast.Expression {
 	list := []ast.Expression{}
 
 	if p.peekTokenIs(end) {
 		p.nextToken()
 		return list
 	}
-	
+
 	p.nextToken()
 	list = append(list, p.parseExpression(LOWEST))
 
