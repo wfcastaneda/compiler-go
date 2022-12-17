@@ -1,2 +1,2 @@
-# interpreter-go
-Simple interpreter written in GO. Written following "Writing an Interpreter in GO" by Thorsten Ball.
+# compiler-go
+Simple bytecode compiler and virtual machine written in GO. Written following "Writing a Compiler in GO" by Thorsten Ball.
