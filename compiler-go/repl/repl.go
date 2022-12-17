@@ -3,10 +3,10 @@ package repl
 import (
 	"bufio"
 	"fmt"
-	"gopherlang-interpreter/evaluator"
-	"gopherlang-interpreter/lexer"
-	"gopherlang-interpreter/object"
-	"gopherlang-interpreter/parser"
+	"gopherlang-compiler/evaluator"
+	"gopherlang-compiler/lexer"
+	"gopherlang-compiler/object"
+	"gopherlang-compiler/parser"
 	"io"
 )
 

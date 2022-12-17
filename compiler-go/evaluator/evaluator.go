@@ -2,8 +2,8 @@ package evaluator
 
 import (
 	"fmt"
-	"gopherlang-interpreter/ast"
-	"gopherlang-interpreter/object"
+	"gopherlang-compiler/ast"
+	"gopherlang-compiler/object"
 )
 
 var (

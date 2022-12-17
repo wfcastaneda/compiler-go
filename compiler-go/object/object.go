@@ -3,7 +3,7 @@ package object
 import (
 	"bytes"
 	"fmt"
-	"gopherlang-interpreter/ast"
+	"gopherlang-compiler/ast"
 	"strings"
 	"hash/fnv"
 )

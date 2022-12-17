@@ -2,7 +2,7 @@ package ast
 
 import (
 	"bytes"
-	"gopherlang-interpreter/token"
+	"gopherlang-compiler/token"
 	"strings"
 )
 

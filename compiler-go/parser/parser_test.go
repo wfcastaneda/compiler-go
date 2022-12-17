@@ -1,8 +1,8 @@
 package parser
 
 import (
-	"gopherlang-interpreter/ast"
-	"gopherlang-interpreter/lexer"
+	"gopherlang-compiler/ast"
+	"gopherlang-compiler/lexer"
 	"testing"
 	"fmt"
 )

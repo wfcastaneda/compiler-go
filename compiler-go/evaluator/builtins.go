@@ -2,7 +2,7 @@ package evaluator
 
 import (
 	"fmt"
-	"gopherlang-interpreter/object"
+	"gopherlang-compiler/object"
 )
 
 var builtins = map[string]*object.Builtin{

@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"gopherlang-interpreter/token"
+	"gopherlang-compiler/token"
 	"testing"
 )
 

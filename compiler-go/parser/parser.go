@@ -2,9 +2,9 @@ package parser
 
 import (
 	"fmt"
-	"gopherlang-interpreter/ast"
-	"gopherlang-interpreter/lexer"
-	"gopherlang-interpreter/token"
+	"gopherlang-compiler/ast"
+	"gopherlang-compiler/lexer"
+	"gopherlang-compiler/token"
 	"strconv"
 )
 

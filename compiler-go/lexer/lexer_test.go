@@ -2,7 +2,7 @@ package lexer
 
 import (
     "testing"
-    "gopherlang-interpreter/token"
+    "gopherlang-compiler/token"
 )
 
 func TestNextToken(t *testing.T) {

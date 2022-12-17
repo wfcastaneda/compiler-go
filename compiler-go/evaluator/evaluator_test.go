@@ -1,9 +1,9 @@
 package evaluator
 
 import (
-	"gopherlang-interpreter/lexer"
-	"gopherlang-interpreter/object"
-	"gopherlang-interpreter/parser"
+	"gopherlang-compiler/lexer"
+	"gopherlang-compiler/object"
+	"gopherlang-compiler/parser"
 	"testing"
 )
 

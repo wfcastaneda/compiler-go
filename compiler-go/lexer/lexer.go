@@ -1,6 +1,6 @@
 package lexer
 
-import "gopherlang-interpreter/token"
+import "gopherlang-compiler/token"
 
 type Lexer struct {
     input         string
